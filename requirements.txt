@@ -3,7 +3,7 @@
 #   pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124
 #
 # transformers 4.57.x is the first release with Olmo-3 support; vllm 0.8.5 is the last
-# release that still builds against torch 2.6 (it runs Qwen3 / SmolLM3 in Stage 1).
+# release that still builds against torch 2.6 (it runs Qwen3 / SmolLM3 for CoT extraction).
 transformers==4.57.1
 vllm==0.8.5
 datasets==4.0.0
@@ -14,8 +14,8 @@ numpy
 tqdm
 requests
 einops
-x_transformers
-hyper_connections
+x_transformers==2.31.19
+hyper_connections==0.4.11
 
 # flash-attn is REQUIRED: train/args.py and evaluation/evaluate_model.py both default
 # --attn_implementation to flash_attention_2 (pass --attn_implementation sdpa to avoid it).

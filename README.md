@@ -263,9 +263,31 @@ python -m evaluation.print_accuracy --model Qwen/Qwen3-0.6B --task gsm8k-test
 
 Use `--sm3b` or `--om7b` for the other models. Checkpoint-specific examples are
 in `scripts/eval/eval_{qwen,smollm,olmo}_{math,extended}.sh`; these are one-worker
-commands, so launch them with the intended GPU/shard configuration. For example,
-the supplied SmolLM math checkpoint uses `--use_text_embedding True`, and the
-Olmo examples use `--vq_gumbel False --vq_soft False`.
+commands, so launch them with the intended GPU/shard configuration. Each line is one
+shard of an 8-shard run, so start each script once per GPU; run alone, a script scores
+only shard 0.
+
+```bash
+for i in 0 1 2 3 4 5 6 7; do
+  CUDA_VISIBLE_DEVICES=$i bash scripts/eval/eval_qwen_math.sh &
+done
+wait
+```
+
+For example, the supplied SmolLM math checkpoint uses `--use_text_embedding True`, and
+the Olmo examples use `--vq_gumbel False --vq_soft False`. Each checkpoint needs the
+flags below; a mismatch still loads, but gives different results.
+
+| Checkpoint | Model flag | Tasks | Extra flags |
+|---|---|---|---|
+| `qwen3-0.6b-math.ckpt` | | `gsm8k-test`, `math500` | |
+| `qwen3-0.6b-extended.ckpt` | | `aime_24_25` | `--thinking_budgets 2500` |
+| | | `commonsenseqa`, `bbh` | `--vq_gumbel False --vq_soft False` |
+| | | `livecodebench` | `--nothink_mode --temperature 0.2` |
+| `smollm3-3b-math.ckpt` | `--sm3b` | `gsm8k-test`, `math500` | `--use_text_embedding True` |
+| `smollm3-3b-extended.ckpt` | `--sm3b` | `aime_24_25`, `commonsenseqa`, `bbh`, `livecodebench` | |
+| `olmo3-7b-think-math.ckpt` | `--om7b` | `gsm8k-test`, `math500` | `--vq_gumbel False --vq_soft False` |
+| `olmo3-7b-think-extended.ckpt` | `--om7b` | `aime_24_25`, `commonsenseqa`, `bbh`, `livecodebench` | `--vq_gumbel False --vq_soft False` |
 
 HyperThink writes
 `<output_dir>/<MODEL_TAG>/<TEST_TASK>/hyperthink_shard_<id>_of_<count>.jsonl`.
