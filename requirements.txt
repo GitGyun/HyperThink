@@ -1,0 +1,25 @@
+# Install PyTorch first, matching your CUDA driver (the pins below were validated with
+# torch 2.6.0+cu124 on Python 3.11):
+#   pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124
+#
+# transformers 4.57.x is the first release with Olmo-3 support; vllm 0.8.5 is the last
+# release that still builds against torch 2.6 (it runs Qwen3 / SmolLM3 in Stage 1).
+transformers==4.57.1
+vllm==0.8.5
+datasets==4.0.0
+accelerate==1.10.1
+wandb
+sympy
+numpy
+tqdm
+requests
+einops
+x_transformers
+hyper_connections
+
+# flash-attn is REQUIRED: train/args.py and evaluation/evaluate_model.py both default
+# --attn_implementation to flash_attention_2 (pass --attn_implementation sdpa to avoid it).
+# Install the prebuilt wheel matching your torch / python / C++ ABI instead of building
+# from source. For the torch 2.6.0+cu124 / py3.11 / CXX11_ABI=False stack above:
+#   pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.7.4.post1/flash_attn-2.7.4.post1+cu12torch2.6cxx11abiFALSE-cp311-cp311-linux_x86_64.whl
+# Check your ABI with: python -c "import torch; print(torch._C._GLIBCXX_USE_CXX11_ABI)"

@@ -1,0 +1,2 @@
+NUM_SHARDS=8 bash scripts/eval/distributed_evaluate.sh --ckpt outputs/checkpoints/smollm3-3b-math.ckpt --sm3b --use_text_embedding True --task gsm8k-test
+NUM_SHARDS=8 bash scripts/eval/distributed_evaluate.sh --ckpt outputs/checkpoints/smollm3-3b-math.ckpt --sm3b --use_text_embedding True --task math500

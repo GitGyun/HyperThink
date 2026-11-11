@@ -1,0 +1,4 @@
+NUM_SHARDS=8 bash scripts/eval/distributed_evaluate.sh --ckpt outputs/checkpoints/olmo3-7b-think-extended.ckpt --om7b --task aime_24_25 --vq_gumbel False --vq_soft False
+NUM_SHARDS=8 bash scripts/eval/distributed_evaluate.sh --ckpt outputs/checkpoints/olmo3-7b-think-extended.ckpt --om7b --task commonsenseqa --vq_gumbel False --vq_soft False
+NUM_SHARDS=8 bash scripts/eval/distributed_evaluate.sh --ckpt outputs/checkpoints/olmo3-7b-think-extended.ckpt --om7b --task bbh --vq_gumbel False --vq_soft False
+NUM_SHARDS=8 bash scripts/eval/distributed_evaluate.sh --ckpt outputs/checkpoints/olmo3-7b-think-extended.ckpt --om7b --task livecodebench --vq_gumbel False --vq_soft False

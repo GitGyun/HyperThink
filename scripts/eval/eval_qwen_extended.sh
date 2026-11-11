@@ -1,0 +1,4 @@
+NUM_SHARDS=8 bash scripts/eval/distributed_evaluate.sh --ckpt outputs/checkpoints/qwen3-0.6b-extended.ckpt --task aime_24_25 --thinking_budgets 2500
+NUM_SHARDS=8 bash scripts/eval/distributed_evaluate.sh --ckpt outputs/checkpoints/qwen3-0.6b-extended.ckpt --task commonsenseqa --vq_gumbel False --vq_soft False
+NUM_SHARDS=8 bash scripts/eval/distributed_evaluate.sh --ckpt outputs/checkpoints/qwen3-0.6b-extended.ckpt --task bbh --vq_gumbel False --vq_soft False
+NUM_SHARDS=8 bash scripts/eval/distributed_evaluate.sh --ckpt outputs/checkpoints/qwen3-0.6b-extended.ckpt --task livecodebench --nothink_mode --temperature 0.2

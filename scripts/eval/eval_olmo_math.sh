@@ -1,0 +1,2 @@
+NUM_SHARDS=8 bash scripts/eval/distributed_evaluate.sh --ckpt outputs/checkpoints/olmo3-7b-think-math.ckpt --om7b --task gsm8k-test --vq_gumbel False --vq_soft False
+NUM_SHARDS=8 bash scripts/eval/distributed_evaluate.sh --ckpt outputs/checkpoints/olmo3-7b-think-math.ckpt --om7b --task math500 --vq_gumbel False --vq_soft False

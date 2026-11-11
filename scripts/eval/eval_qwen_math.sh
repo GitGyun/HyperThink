@@ -1,0 +1,2 @@
+NUM_SHARDS=8 bash scripts/eval/distributed_evaluate.sh --ckpt outputs/checkpoints/qwen3-0.6b-math.ckpt --task gsm8k-test
+NUM_SHARDS=8 bash scripts/eval/distributed_evaluate.sh --ckpt outputs/checkpoints/qwen3-0.6b-math.ckpt --task math500
